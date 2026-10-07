@@ -15,7 +15,7 @@
 "Q2","AO3400A","Package_TO_SOT_SMD:SOT-23","1","http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf","30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"
 "R1-R4","1M","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","4","~","Resistor"
 "R7","52,3k 1%","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","1","","Resistor"
-"SW1","OS102011MA1Q","Button_Switch_THT:SW_Slide_SPDT_Angled_CK_OS102011MA1Q","1","","1x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol"
+"SW1","OS102011MA1Q","Button_Switch_THT:SW_Slide_SPDT_Angled_CK_OS102011MA1Q","1","~","Switch, single pole double throw"
 "TP1","+BATT","TestPoint:TestPoint_Pad_D1.5mm","1","","test point"
 "TP2","+3V3","TestPoint:TestPoint_Pad_D1.5mm","1","","test point"
 "TP3","GND","TestPoint:TestPoint_Pad_D1.5mm","1","","test point"

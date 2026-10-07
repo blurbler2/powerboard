@@ -12,8 +12,8 @@ test points. Breadboard format with two 1x04 pin headers 12.7 mm apart, like
 |---|---|
 | Input | 4x AA NiMH, 4.8 ... 5.6 V (converter accepts 1.8 ... 6.5 V) |
 | Output | 3.3 V (set by R7 = 52.3 kΩ 1 %) |
-| Output current | converter 750 mA max, **but SW1 is rated 100 mA** → about 120 mA at 3.3 V as built (see [SW1](#sw1-onoff-switch)) |
-| Quiescent current | 60 nA (TPS62842) + MOSFET leakage; the battery divider draws nothing while it is off |
+| Output current | up to 750 mA (converter limit); F1 holds 500 mA from the battery, which is about 600 mA at 3.3 V even with nearly empty cells. SW1 carries no load current (see [SW1](#sw1-onoff-switch)) |
+| Quiescent current | ON: 60 nA (TPS62842) + MOSFET leakage, the battery divider draws nothing while it is off. OFF: converter shut down, 25 nA typ. (datasheet max 300 nA) + leakage |
 | Protection | 500 mA polyfuse F1, reverse-polarity Schottky diode D1 (SS14) |
 | Board | 16.0 x 45.72 mm, 2 layers, 1.6 mm, KiCad 10 |
 
@@ -24,7 +24,7 @@ test points. Breadboard format with two 1x04 pin headers 12.7 mm apart, like
 Top view, switch at the top edge:
 
 ```
-            SW1 (actuator sticks out over the edge)
+     ON <-- SW1 --> OFF  (actuator sticks out over the edge)
    Q1 R3              D1        F1
    R1 Q2                        J1  (battery: + upper pin, - square pad)
    R2 R4   TP1 (+BATT)
@@ -58,25 +58,36 @@ on the switch side. The labels are printed next to the pins on both sides of the
 
 | Pin | J3 (left, `SIG`) | J2 (right, `PWR`) |
 |-----|------------------|-------------------|
-| 1 | GND | +BATT (battery after switch and diode) |
+| 1 | GND | +BATT (battery after F1 and D1, live even when SW1 is OFF) |
 | 2 | ADC (battery voltage / 2, only while EN is high) | GND |
 | 3 | EN (enable battery measurement, 3.3 V logic input) | GND |
 | 4 | +3V3 | +3V3 |
 
 +3V3 on J2.4 and J3.4 is the same rail, after the current jumper JP1. All GND pins are the same.
+J3 `EN` only switches the battery divider; it has nothing to do with SW1.
 
 ### SW1 on/off switch
 
 SW1 is a C&K **OS102011MA1Q**, a right-angle (side-actuated) SPDT slide switch, through-hole.
 The footprint looks big because of its two large oval pads: they are the soldered legs of the metal
 frame that hold the switch mechanically and carry no signal. The three small pads in the middle
-are the contacts; only pins 1 and 2 are used (pin 1 = right, pin 2 = middle, pin 3 unused).
+are the contacts.
 
-- ON = pins 1 and 2 connected. Check which slider position that is with a continuity tester
-  before first use (probe the right and the middle small pad).
-- The switch is rated 100 mA. That is enough for a microcontroller with sensors, but it limits
-  the module to about 120 mA at 3.3 V. For more current, replace SW1 by a higher-rated switch
-  or a wire bridge between pins 1 and 2.
+SW1 does not sit in the battery line. It drives the enable pin of the converter (net `BUCK_EN`):
+
+| Slider position | Silkscreen | Contacts (C&K switch function) | Result |
+|-----------------|------------|--------------------------------|--------|
+| left | `ON` | middle pin to left pin (2-3) → EN = +BATT | converter runs, +3V3 on |
+| right | `OFF` | middle pin to right pin (1-2) → EN = GND | converter shut down (25 nA typ.), +3V3 discharged to 0 V |
+
+- The slide direction comes from the C&K OS series datasheet: position 1 connects pins 1-2,
+  position 2 connects pins 2-3, i.e. the slider always connects the middle pin to the outer pin
+  on its own side. The `ON` / `OFF` labels are printed at the matching ends of the switch.
+- Only the enable pin's input current flows through SW1, so its 100 mA contact rating does not
+  limit the output. The load current goes J1 → F1 → D1 → converter.
+- When OFF, the battery stays connected to +BATT (J2.1, TP1) and to the converter input. Take the
+  batteries out (or unplug J1) for long storage; the standby current is far below the
+  self-discharge of NiMH cells anyway.
 
 ### Microcontroller, e.g. STM32WB Nucleo
 
@@ -153,7 +164,7 @@ SMD pads, 1.5 mm, for probe tips or small clips.
 
 | TP | Net | Where |
 |----|-----|-------|
-| TP1 | +BATT (battery after SW1 and D1) | below D1, next to Q2 |
+| TP1 | +BATT (battery after F1 and D1) | below D1, next to Q2 |
 | TP2 | +3V3 (after JP1) | bottom edge, right of JP1 |
 | TP3 | GND | left side, next to C15 / C2 |
 
@@ -192,9 +203,9 @@ Hand-solder footprints throughout, except U1:
 First power-up, without a load:
 
 1. Check with an ohmmeter: TP1–TP3 and TP2–TP3 are not shorted.
-2. Find the ON position of SW1 (continuity between its right and middle small pad).
-3. Jumper cap on JP1, batteries in, switch on.
-4. TP1–TP3 ≈ battery voltage minus 0.3 V, TP2–TP3 = 3.3 V.
+2. SW1 to `OFF` (slider right), jumper cap on JP1, batteries in.
+3. TP1–TP3 ≈ battery voltage minus 0.3 V, TP2–TP3 = 0 V.
+4. SW1 to `ON` (slider left): TP2–TP3 = 3.3 V.
 5. EN to 3.3 V: J3 ADC ≈ half of TP1 after about a second; EN open: ADC = 0 V.
 
 ## Layout notes

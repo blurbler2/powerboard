@@ -1233,6 +1233,196 @@
 			)
 			(embedded_fonts no)
 		)
+	(symbol "Switch:SW_SPDT"
+			(pin_names
+				(offset 0)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "SW"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "SW_SPDT"
+				(at 0 -5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Switch, single pole double throw"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "switch single-pole double-throw spdt ON-ON"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "SW_SPDT_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.4572)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.651 0.254) (xy 1.651 2.286)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 2.54)
+					(radius 0.4572)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 -2.54)
+					(radius 0.4572)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "SW_SPDT_1_1"
+				(rectangle
+					(start -3.175 3.81)
+					(end 3.175 -3.81)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 2.54)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Connector_Generic:Conn_01x02"
 			(pin_names
 				(offset 1.016)
@@ -3080,7 +3270,7 @@
 		)
 		(uuid "c195be4c-b73f-465c-870c-b1290e5f9e62")
 	)
-	(text "Hinweise\n\nF1.....Schutzschalter gegen Kurzschluss (Polyfuse, 1206)\nR1, R2.....Spannungsteiler 1:2 (1M/1M, 1 %) für ADC Messung der Akku Spannung, C17 150nF Ladungsspeicher für den ADC (AN2834)\nQ1, Q2, R3, R4.....Teiler abschaltbar: MEAS_EN High (3,3 V GPIO) -> Q2 zieht das Gate von Q1 auf GND, Q1 legt +BATT an R1\n                   MEAS_EN offen/Low -> R3/R4 halten Q1/Q2 aus, Teiler stromlos; vor der Messung ca. 0,6 s warten, VBAT = 2 x U_ADC\nR7.....52,3 kOhm ±1 %, E96 - stellt 3,3V Ausgang ein\nD1.....Verpolschutz (Schottky SS14)\nSW1.....Ein/Ausschalten der Batterie (Schalter, Pins 1-2)\nC2 + C15.....direkt an U1 VIN/GND, C14 22µF 16V X7R Eingangspuffer\nC1 + C16.....Ausgang, Summe aller Kondensatoren an +3V3 max. 40µF (Datenblatt)\nJP1.....Strommessbrücke: Pin 1 (eckig, BUCK) = Wandlerausgang, Pin 2 (3V3) = +3V3-Schiene; Jumper ziehen, Amperemeter + an Pin 1, COM an Pin 2\nTP1-TP3.....Messpunkte +BATT, +3V3, GND\nJ2, J3.....Stiftleisten 1x04, 12,7 mm Abstand (Breadboard): J2 = +BATT/GND/GND/+3V3, J3 = GND/ADC_BATT/MEAS_EN/+3V3\n"
+	(text "Hinweise\n\nF1.....Schutzschalter gegen Kurzschluss (Polyfuse, 1206)\nR1, R2.....Spannungsteiler 1:2 (1M/1M, 1 %) für ADC Messung der Akku Spannung, C17 150nF Ladungsspeicher für den ADC (AN2834)\nQ1, Q2, R3, R4.....Teiler abschaltbar: MEAS_EN High (3,3 V GPIO) -> Q2 zieht das Gate von Q1 auf GND, Q1 legt +BATT an R1\n                   MEAS_EN offen/Low -> R3/R4 halten Q1/Q2 aus, Teiler stromlos; vor der Messung ca. 0,6 s warten, VBAT = 2 x U_ADC\nR7.....52,3 kOhm ±1 %, E96 - stellt 3,3V Ausgang ein\nD1.....Verpolschutz (Schottky SS14)\nSW1.....Ein/Aus über EN von U1 (SPDT): Schieber zu Pin 3 (Silk ON) = EN an +BATT, zu Pin 1 (OFF) = EN an GND; kein Laststrom über SW1\nC2 + C15.....direkt an U1 VIN/GND, C14 22µF 16V X7R Eingangspuffer\nC1 + C16.....Ausgang, Summe aller Kondensatoren an +3V3 max. 40µF (Datenblatt)\nJP1.....Strommessbrücke: Pin 1 (eckig, BUCK) = Wandlerausgang, Pin 2 (3V3) = +3V3-Schiene; Jumper ziehen, Amperemeter + an Pin 1, COM an Pin 2\nTP1-TP3.....Messpunkte +BATT, +3V3, GND\nJ2, J3.....Stiftleisten 1x04, 12,7 mm Abstand (Breadboard): J2 = +BATT/GND/GND/+3V3, J3 = GND/ADC_BATT/MEAS_EN/+3V3\n"
 		(exclude_from_sim no)
 		(at 21.082 128.016 0)
 		(effects
@@ -3121,12 +3311,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "133b9b11-33ad-4c7c-a8e3-2c2a40eadb04")
-	)
-	(junction
-		(at 132.08 62.23)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "275b7917-9090-4218-b823-6955176e300d")
 	)
 	(junction
 		(at 172.72 62.23)
@@ -3205,16 +3389,6 @@
 			(type default)
 		)
 		(uuid "22156a8b-f726-4ddd-8c08-bac848e18539")
-	)
-	(wire
-		(pts
-			(xy 60.96 62.23) (xy 59.69 62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2a7a78b1-1eeb-42bd-895d-edffc7094473")
 	)
 	(wire
 		(pts
@@ -3305,16 +3479,6 @@
 			(type default)
 		)
 		(uuid "6bbf06a8-d451-47d0-83bc-073f5b32b7ca")
-	)
-	(wire
-		(pts
-			(xy 132.08 64.77) (xy 132.08 62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "71d6eb5f-3fae-42fd-a434-0868858c7da5")
 	)
 	(wire
 		(pts
@@ -3425,16 +3589,6 @@
 			(type default)
 		)
 		(uuid "ea58ad2c-4570-42b9-9613-6a3da2bfb700")
-	)
-	(wire
-		(pts
-			(xy 74.93 62.23) (xy 73.66 62.23)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ebb88064-d41e-4e63-854c-7264d80a60d9")
 	)
 	(wire
 		(pts
@@ -4030,86 +4184,6 @@
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
 					(reference "#PWR011")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Switch:SW_DIP_x01")
-		(at 67.31 62.23 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(uuid "3226db9e-3bbb-477e-9737-e553a674b246")
-		(property "Reference" "SW1"
-			(at 67.564 57.15 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "OS102011MA1Q"
-			(at 67.31 57.15 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Button_Switch_THT:SW_Slide_SPDT_Angled_CK_OS102011MA1Q"
-			(at 67.31 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 67.31 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "1x DIP Switch, Single Pole Single Throw (SPST) switch, small symbol"
-			(at 67.31 62.23 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "2"
-			(uuid "f32e8617-5777-4634-9655-5da4cb063278")
-		)
-		(pin "1"
-			(uuid "521687ec-33c0-4d5c-81e4-e4e75b7d112a")
-		)
-		(instances
-			(project "powerboard-v1"
-				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "SW1")
 					(unit 1)
 				)
 			)
@@ -7075,6 +7149,316 @@
 		)
 		(uuid "f0f34c63-f55b-51ef-b01c-22158fd48667")
 	)
+	(wire
+		(pts
+			(xy 60.96 62.23) (xy 73.66 62.23)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af0f6c6e-ddc2-5ac8-a69e-3708d8bcea5e")
+	)
+	(label "BUCK_EN"
+		(at 132.08 64.77 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "452033f5-5022-5bc0-a27f-e6d00fa8f3a3")
+	)
+	(symbol
+		(lib_id "Switch:SW_SPDT")
+		(at 119.38 43.18 0)
+		(mirror x)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7fae22d4-6f8d-508d-963c-071a3e1df0fb")
+		(property "Reference" "SW1"
+			(at 119.38 38.735 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "OS102011MA1Q"
+			(at 104.14 50.165 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Button_Switch_THT:SW_Slide_SPDT_Angled_CK_OS102011MA1Q"
+			(at 119.38 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 119.38 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Switch, single pole double throw"
+			(at 119.38 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ed7499df-5cd6-56e0-a430-9d64fe06ba6e")
+		)
+		(pin "2"
+			(uuid "5e1194d3-d631-5c8d-a026-3aed7a8000ce")
+		)
+		(pin "3"
+			(uuid "2ac9077e-a9a0-5478-b0b3-47a4856cd9e0")
+		)
+		(instances
+			(project "powerboard-v1"
+				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
+					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 124.46 40.64) (xy 124.46 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b3e75d5c-3d9b-51cf-aab0-e4ab6136615f")
+	)
+	(symbol
+		(lib_id "power:+BATT")
+		(at 124.46 38.1 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "4fc5e663-40cf-5677-ade9-d80193a614b2")
+		(property "Reference" "#PWR203"
+			(at 124.46 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+BATT"
+			(at 124.46 34.29 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+BATT\""
+			(at 124.46 38.1 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9df6b83d-7666-5d3c-8130-aaab09b63b8b")
+		)
+		(instances
+			(project "powerboard-v1"
+				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
+					(reference "#PWR203")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 124.46 45.72) (xy 124.46 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1d954033-7388-5838-8cf4-66749bd06a0c")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 124.46 48.26 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "4b6ddeed-1e78-59fb-9200-8963e474eadb")
+		(property "Reference" "#PWR204"
+			(at 124.46 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 124.46 52.705 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 124.46 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 124.46 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\""
+			(at 124.46 48.26 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "70d455bf-d44e-5da1-b31a-d3a0abfcd3ab")
+		)
+		(instances
+			(project "powerboard-v1"
+				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
+					(reference "#PWR204")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 114.3 43.18) (xy 109.22 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "adeca795-41e2-59f0-aa16-04a70c825d7b")
+	)
+	(label "BUCK_EN"
+		(at 109.22 43.18 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "c13fbdf9-4327-530d-9aa6-e984621227f7")
+	)
+	(text "SW1 ON = Schieber zur Seite von Pin 3 (2-3 verbunden), OFF = zu Pin 1 (1-2 verbunden)"
+		(exclude_from_sim no)
+		(at 104.14 31.75 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+				(color 132 0 132 1)
+			)
+			(justify left)
+		)
+		(uuid "f4897254-2d76-54da-9aa6-92ded57a662c")
+	)
 	(symbol
 		(lib_id "power:+3V3")
 		(at 213.36 62.23 0)
@@ -7085,8 +7469,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "452033f5-5022-5bc0-a27f-e6d00fa8f3a3")
-		(property "Reference" "#PWR203"
+		(uuid "92917da8-ea3c-57a0-b433-5340a7f068b3")
+		(property "Reference" "#PWR205"
 			(at 213.36 62.23 0)
 			(hide yes)
 			(show_name no)
@@ -7141,12 +7525,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "af0f6c6e-ddc2-5ac8-a69e-3708d8bcea5e")
+			(uuid "078437a6-c731-57f2-8f4e-4745a4eb2215")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR203")
+					(reference "#PWR205")
 					(unit 1)
 				)
 			)
@@ -7163,7 +7547,7 @@
 		(fill
 			(type none)
 		)
-		(uuid "ed7499df-5cd6-56e0-a430-9d64fe06ba6e")
+		(uuid "4dc95107-1ed3-542f-8f33-b80489ae6193")
 	)
 	(text "Steckerleisten (Breadboard: 2,54 mm Raster, 12,7 mm Abstand)"
 		(exclude_from_sim no)
@@ -7177,7 +7561,7 @@
 			)
 			(justify left)
 		)
-		(uuid "5e1194d3-d631-5c8d-a026-3aed7a8000ce")
+		(uuid "07ea53be-02c5-542b-a3f4-a2e7b1d32272")
 	)
 	(text "J3 = linke Längsseite, J2 = rechte Längsseite, Pin 1 jeweils auf der Seite von SW1"
 		(exclude_from_sim no)
@@ -7189,7 +7573,7 @@
 			)
 			(justify left)
 		)
-		(uuid "2ac9077e-a9a0-5478-b0b3-47a4856cd9e0")
+		(uuid "0a635095-1c6c-5cbf-ac27-6ca0cdd93e48")
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x04")
@@ -7201,7 +7585,7 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "1d954033-7388-5838-8cf4-66749bd06a0c")
+		(uuid "f12b610c-ba6b-5c8a-b430-9283b3bb478a")
 		(property "Reference" "J3"
 			(at 205.74 127.00000000000001 0)
 			(show_name no)
@@ -7256,16 +7640,16 @@
 			)
 		)
 		(pin "1"
-			(uuid "7fae22d4-6f8d-508d-963c-071a3e1df0fb")
+			(uuid "8c6a5d46-2d2e-5ed3-9119-dc01eb7fef74")
 		)
 		(pin "2"
-			(uuid "b3e75d5c-3d9b-51cf-aab0-e4ab6136615f")
+			(uuid "788bd455-058a-530c-8513-0276461a6d3b")
 		)
 		(pin "3"
-			(uuid "9df6b83d-7666-5d3c-8130-aaab09b63b8b")
+			(uuid "8aa6eb70-6b91-5d20-959e-e10c6a88d98d")
 		)
 		(pin "4"
-			(uuid "4fc5e663-40cf-5677-ade9-d80193a614b2")
+			(uuid "c073c5da-5abe-5dab-8de5-3c13f3a5beae")
 		)
 		(instances
 			(project "powerboard-v1"
@@ -7284,7 +7668,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "70d455bf-d44e-5da1-b31a-d3a0abfcd3ab")
+		(uuid "db66bf2d-cd6b-5e4f-8330-3becda398796")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -7296,8 +7680,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "adeca795-41e2-59f0-aa16-04a70c825d7b")
-		(property "Reference" "#PWR204"
+		(uuid "206058fb-a3e8-5b8d-9f48-2638cf24acfb")
+		(property "Reference" "#PWR206"
 			(at 193.04 129.54000000000002 0)
 			(hide yes)
 			(show_name no)
@@ -7352,12 +7736,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "4b6ddeed-1e78-59fb-9200-8963e474eadb")
+			(uuid "eb61fca8-ba97-54b0-8941-180379690d40")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR204")
+					(reference "#PWR206")
 					(unit 1)
 				)
 			)
@@ -7371,7 +7755,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "c13fbdf9-4327-530d-9aa6-e984621227f7")
+		(uuid "674c2846-3fd0-5047-855d-e13cd37c53ea")
 	)
 	(label "ADC_BATT"
 		(at 180.34 132.08 180)
@@ -7381,7 +7765,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "f4897254-2d76-54da-9aa6-92ded57a662c")
+		(uuid "4ab6bfc0-a0e2-5611-b31f-c18f8bf1ab7c")
 	)
 	(wire
 		(pts
@@ -7391,7 +7775,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "078437a6-c731-57f2-8f4e-4745a4eb2215")
+		(uuid "82c34bde-df9e-5a42-a648-45d1267d792a")
 	)
 	(label "MEAS_EN"
 		(at 180.34 134.62 180)
@@ -7401,7 +7785,7 @@
 			)
 			(justify right bottom)
 		)
-		(uuid "92917da8-ea3c-57a0-b433-5340a7f068b3")
+		(uuid "4f97e640-2dec-5131-86ff-cfbadae8b17b")
 	)
 	(wire
 		(pts
@@ -7411,7 +7795,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4dc95107-1ed3-542f-8f33-b80489ae6193")
+		(uuid "2b0ce037-44e1-5ee7-86e8-d304ae9dccc5")
 	)
 	(symbol
 		(lib_id "power:+3V3")
@@ -7423,8 +7807,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "0a635095-1c6c-5cbf-ac27-6ca0cdd93e48")
-		(property "Reference" "#PWR205"
+		(uuid "7016329d-7bf7-5edf-87de-4163e4d4df7a")
+		(property "Reference" "#PWR207"
 			(at 193.04 137.16000000000003 0)
 			(hide yes)
 			(show_name no)
@@ -7479,12 +7863,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "07ea53be-02c5-542b-a3f4-a2e7b1d32272")
+			(uuid "61e98594-1914-5fce-90d6-2ea820d5dfd3")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR205")
+					(reference "#PWR207")
 					(unit 1)
 				)
 			)
@@ -7500,7 +7884,7 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "f12b610c-ba6b-5c8a-b430-9283b3bb478a")
+		(uuid "73a56c05-e5dc-5d68-95c4-80aa85daf1cd")
 		(property "Reference" "J2"
 			(at 259.08 127.00000000000001 0)
 			(show_name no)
@@ -7555,16 +7939,16 @@
 			)
 		)
 		(pin "1"
-			(uuid "8c6a5d46-2d2e-5ed3-9119-dc01eb7fef74")
+			(uuid "aed1f602-a9e2-5464-b1a5-2d0465ade817")
 		)
 		(pin "2"
-			(uuid "788bd455-058a-530c-8513-0276461a6d3b")
+			(uuid "427072a8-1d99-588d-ae7b-1a1e81eaf0c6")
 		)
 		(pin "3"
-			(uuid "8aa6eb70-6b91-5d20-959e-e10c6a88d98d")
+			(uuid "f832f66a-4686-5e1b-88eb-c13b673ae545")
 		)
 		(pin "4"
-			(uuid "c073c5da-5abe-5dab-8de5-3c13f3a5beae")
+			(uuid "0ed65127-ccf8-5cf6-afef-67b70bcbf390")
 		)
 		(instances
 			(project "powerboard-v1"
@@ -7583,7 +7967,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "db66bf2d-cd6b-5e4f-8330-3becda398796")
+		(uuid "07c91814-b3e1-5f25-bba2-d8bc9fa99f04")
 	)
 	(symbol
 		(lib_id "power:+BATT")
@@ -7595,8 +7979,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "206058fb-a3e8-5b8d-9f48-2638cf24acfb")
-		(property "Reference" "#PWR206"
+		(uuid "1fa3fef4-2e59-5639-a9d5-a350f556f34b")
+		(property "Reference" "#PWR208"
 			(at 246.37999999999997 129.54000000000002 0)
 			(hide yes)
 			(show_name no)
@@ -7651,12 +8035,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "eb61fca8-ba97-54b0-8941-180379690d40")
+			(uuid "9b9b717f-b85d-587d-b384-7e2f5d61d05a")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR206")
+					(reference "#PWR208")
 					(unit 1)
 				)
 			)
@@ -7670,7 +8054,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "674c2846-3fd0-5047-855d-e13cd37c53ea")
+		(uuid "e5ac458a-a877-58d1-9970-a50fdd42dde0")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -7682,8 +8066,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "82c34bde-df9e-5a42-a648-45d1267d792a")
-		(property "Reference" "#PWR207"
+		(uuid "8ee7ece1-5001-5fdd-a410-e42200244293")
+		(property "Reference" "#PWR209"
 			(at 246.37999999999997 132.08 0)
 			(hide yes)
 			(show_name no)
@@ -7738,12 +8122,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "4ab6bfc0-a0e2-5611-b31f-c18f8bf1ab7c")
+			(uuid "0b8003db-0c81-59e5-bfbb-c9cac1660818")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR207")
+					(reference "#PWR209")
 					(unit 1)
 				)
 			)
@@ -7757,7 +8141,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "4f97e640-2dec-5131-86ff-cfbadae8b17b")
+		(uuid "5cdb433b-540c-54e3-b6eb-1d893bda979e")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -7769,8 +8153,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "61e98594-1914-5fce-90d6-2ea820d5dfd3")
-		(property "Reference" "#PWR208"
+		(uuid "4c0af547-02ec-508f-bfbb-d1c1621cba7d")
+		(property "Reference" "#PWR210"
 			(at 246.37999999999997 134.62 0)
 			(hide yes)
 			(show_name no)
@@ -7825,12 +8209,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "2b0ce037-44e1-5ee7-86e8-d304ae9dccc5")
+			(uuid "e2814887-7280-523f-91fb-8b4d6b924c88")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR208")
+					(reference "#PWR210")
 					(unit 1)
 				)
 			)
@@ -7844,7 +8228,7 @@
 			(width 0)
 			(type default)
 		)
-		(uuid "7016329d-7bf7-5edf-87de-4163e4d4df7a")
+		(uuid "cd7b36f6-5245-53d4-b4ba-47d5733c3012")
 	)
 	(symbol
 		(lib_id "power:+3V3")
@@ -7856,8 +8240,8 @@
 		(on_board no)
 		(in_pos_files no)
 		(dnp no)
-		(uuid "427072a8-1d99-588d-ae7b-1a1e81eaf0c6")
-		(property "Reference" "#PWR209"
+		(uuid "30affb0c-4570-5d6f-a66a-97be65f53436")
+		(property "Reference" "#PWR211"
 			(at 246.37999999999997 137.16000000000003 0)
 			(hide yes)
 			(show_name no)
@@ -7912,12 +8296,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "aed1f602-a9e2-5464-b1a5-2d0465ade817")
+			(uuid "3f104e04-a211-5908-9497-53dc945ee728")
 		)
 		(instances
 			(project "powerboard-v1"
 				(path "/f61e0eb5-3a8f-51ba-af6f-5f0129ea876d"
-					(reference "#PWR209")
+					(reference "#PWR211")
 					(unit 1)
 				)
 			)
