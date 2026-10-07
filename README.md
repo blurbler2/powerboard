@@ -89,6 +89,10 @@ are the contacts; only pins 1 and 2 are used (pin 1 = right, pin 2 = middle, pin
 
 If the Nucleo runs from USB, connect only GND, ADC and EN; never tie two 3.3 V supplies together.
 
+The TPS62842 needs 3 ... 40 µF *effective* capacitance on its output (datasheet, COUT). C1 gives
+about 5 µF at 3.3 V; everything the load adds on +3V3 counts too, so keep the load's own
+capacitance below about 30 µF.
+
 ## Measuring the battery voltage (EN / ADC)
 
 R1/R2 (1 MΩ / 1 MΩ) divide the battery voltage by two. Q1 (AO3401A, P-channel) switches the
@@ -132,6 +136,8 @@ It is **not** a power connector and has no GND pin.
 | 1 (square pad) | `BUCK` | converter output (U1 / L1 / C1) |
 | 2 | `3V3` | +3V3 rail (J2.4, J3.4, TP2) |
 
+The labels are on the top side, under the two pins.
+
 - Normal operation: jumper cap **on**.
 - Measuring: pull the jumper cap and connect the multimeter in current mode:
   red probe (mA / µA input) on `BUCK`, black probe (COM) on `3V3`.
@@ -152,6 +158,44 @@ SMD pads, 1.5 mm, for probe tips or small clips.
 | TP3 | GND | left side, next to C15 / C2 |
 
 Battery voltage: TP1 against TP3. Output voltage: TP2 against TP3.
+
+## Ordering the PCB (JLCPCB)
+
+Upload `powerboard-hw/powerboard-v1/fabrication/powerboard-v1-gerbers.zip` (Gerbers + Excellon drill).
+
+| Option | Setting |
+|--------|---------|
+| Layers | 2 |
+| Dimensions | 16 x 45.72 mm (detected from the outline) |
+| Material / thickness | FR-4, 1.6 mm |
+| Outer copper | 1 oz |
+| Surface finish | HASL lead-free; ENIG if you want flatter pads for U1 |
+| Via covering | Tented (the files tent all vias) |
+| Mark on PCB | "Specify a location": the order number goes on the `JLCJLCJLCJLC` text on the bottom |
+| Everything else | default |
+
+The design stays inside JLCPCB's standard 2-layer capabilities: tracks ≥ 0.25 mm,
+clearance ≥ 0.2 mm, smallest hole 0.3 mm with a 0.6 mm via pad, copper-to-edge 0.5 mm,
+silkscreen text 0.8 mm high with 0.15 mm stroke. This is a bare-PCB order; the parts come from
+`bom/powerboard-v1-bom.csv` (JLCPCB assembly would additionally need LCSC part numbers).
+
+## Assembly and first power-up
+
+Hand-solder footprints throughout, except U1:
+
+- **U1 (TPS62842, HVSSOP-8)** has an exposed pad underneath that must be soldered to GND. Use solder
+  paste and hot air or a hot plate. With an iron only, you can feed solder into the pad from the
+  bottom through its two vias, but that is fiddly. Solder U1 first, then the SMD parts, THT parts last.
+- **L1** 2.2 µH, 1008 (2520) size; **C1** 10 µF X5R/X7R ≥ 10 V; **C2** 4.7 µF ≥ 10 V; **C14** 22 µF ≥ 16 V.
+- **J2/J3** from the bottom (plastic under the board), **JP1, J1** from the top.
+
+First power-up, without a load:
+
+1. Check with an ohmmeter: TP1–TP3 and TP2–TP3 are not shorted.
+2. Find the ON position of SW1 (continuity between its right and middle small pad).
+3. Jumper cap on JP1, batteries in, switch on.
+4. TP1–TP3 ≈ battery voltage minus 0.3 V, TP2–TP3 = 3.3 V.
+5. EN to 3.3 V: J3 ADC ≈ half of TP1 after about a second; EN open: ADC = 0 V.
 
 ## Layout notes
 
