@@ -1,0 +1,10 @@
+# KiCad backups, caches and lock files
+*-backups/
+fp-info-cache
+*.lck
+_autosave-*
+\#auto_saved_files\#
+.DS_Store
+
+# KiCad 10 local history (own git repo per project)
+.history/

@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "powerboard")(type "KiCad")(uri "${KIPRJMOD}/../powerboard-lib/powerboard.kicad_sym")(options "")(descr "TPS62842DGRR buck converter"))
+)

@@ -1,0 +1,8 @@
+(version 1)
+
+# THT pads connect to the GND fill on both layers. Where tracks leave room for only one
+# thermal spoke on a layer, the other layer still has all four (checklist 2.4: thermals for hand soldering).
+(rule "THT-Pads: ein Steg pro Lage genuegt"
+	(condition "A.Pad_Type == 'Through-hole'")
+	(constraint min_resolved_spokes 1)
+)
