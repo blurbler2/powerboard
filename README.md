@@ -106,21 +106,22 @@ capacitance below about 30 µF.
 
 ## Measuring the battery voltage (EN / ADC)
 
-R1/R2 (1 MΩ / 1 MΩ) divide the battery voltage by two. Q1 (AO3401A, P-channel) switches the
+R1/R2 (100 kΩ / 100 kΩ, 1 %) divide the battery voltage by two. Q1 (AO3401A, P-channel) switches the
 divider on and off at the battery side, Q2 (AO3400A, N-channel) lets a 3.3 V GPIO drive Q1.
 
 | EN | State | Current |
 |----|-------|---------|
-| high (3.3 V) | Q2 on → Q1 on → divider on, ADC = VBAT / 2 | ≈ 12 µA (2.8 µA divider, 5.6 µA R3, 3.3 µA R4) |
+| high (3.3 V) | Q2 on → Q1 on → divider on, ADC = VBAT / 2 | ≈ 37 µA (28 µA divider, 5.6 µA R3, 3.3 µA R4) |
 | low or open | R4 keeps Q2 off, R3 keeps Q1 off → divider off, ADC = 0 V | MOSFET leakage only (nA) |
 
-The divider is off while the MCU is in reset or the pin is floating, so it never drains the battery
+One measurement (100 ms at 37 µA) costs about 4 µC, roughly 1 nA on average when measuring
+once per hour. The divider is off while the MCU is in reset or the pin is floating, so it never drains the battery
 by accident. While it is off the ADC pin sees 0 V, never more than the MCU supply.
 
 Measurement sequence:
 
 1. Set EN high.
-2. Wait at least **0.6 s**: C17 (150 nF) charges through R1 ∥ R2 = 500 kΩ, τ = 75 ms; 8 τ settle to 12-bit accuracy.
+2. Wait at least **65 ms** (100 ms is comfortable): C17 (150 nF) charges through R1 ∥ R2 = 50 kΩ, τ = 7.5 ms; 8.3 τ settle to 12-bit accuracy.
 3. Read the ADC: V_ADC.
 4. Set EN low (or switch the pin to input / analog).
 5. VBAT = 2 × V_ADC. This is the voltage after D1; the battery itself is about 0.2 ... 0.4 V higher (SS14 forward drop at the actual load).
@@ -129,7 +130,7 @@ Example (STM32 HAL, pin names are placeholders):
 
 ```c
 HAL_GPIO_WritePin(MEAS_EN_GPIO_Port, MEAS_EN_Pin, GPIO_PIN_SET);
-HAL_Delay(600);                                   /* C17 settling */
+HAL_Delay(100);                                   /* C17 settling, >= 65 ms */
 HAL_ADC_Start(&hadc1);
 HAL_ADC_PollForConversion(&hadc1, 10);
 uint32_t raw = HAL_ADC_GetValue(&hadc1);
@@ -206,7 +207,7 @@ First power-up, without a load:
 2. SW1 to `OFF` (slider right), jumper cap on JP1, batteries in.
 3. TP1–TP3 ≈ battery voltage minus 0.3 V, TP2–TP3 = 0 V.
 4. SW1 to `ON` (slider left): TP2–TP3 = 3.3 V.
-5. EN to 3.3 V: J3 ADC ≈ half of TP1 after about a second; EN open: ADC = 0 V.
+5. EN to 3.3 V: J3 ADC ≈ half of TP1 within 0.1 s; EN open: ADC = 0 V.
 
 ## Layout notes
 

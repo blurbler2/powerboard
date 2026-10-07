@@ -3270,7 +3270,7 @@
 		)
 		(uuid "c195be4c-b73f-465c-870c-b1290e5f9e62")
 	)
-	(text "Hinweise\n\nF1.....Schutzschalter gegen Kurzschluss (Polyfuse, 1206)\nR1, R2.....Spannungsteiler 1:2 (1M/1M, 1 %) für ADC Messung der Akku Spannung, C17 150nF Ladungsspeicher für den ADC (AN2834)\nQ1, Q2, R3, R4.....Teiler abschaltbar: MEAS_EN High (3,3 V GPIO) -> Q2 zieht das Gate von Q1 auf GND, Q1 legt +BATT an R1\n                   MEAS_EN offen/Low -> R3/R4 halten Q1/Q2 aus, Teiler stromlos; vor der Messung ca. 0,6 s warten, VBAT = 2 x U_ADC\nR7.....52,3 kOhm ±1 %, E96 - stellt 3,3V Ausgang ein\nD1.....Verpolschutz (Schottky SS14)\nSW1.....Ein/Aus über EN von U1 (SPDT): Schieber zu Pin 3 (Silk ON) = EN an +BATT, zu Pin 1 (OFF) = EN an GND; kein Laststrom über SW1\nC2 + C15.....direkt an U1 VIN/GND, C14 22µF 16V X7R Eingangspuffer\nC1 + C16.....Ausgang, Summe aller Kondensatoren an +3V3 max. 40µF (Datenblatt)\nJP1.....Strommessbrücke: Pin 1 (eckig, BUCK) = Wandlerausgang, Pin 2 (3V3) = +3V3-Schiene; Jumper ziehen, Amperemeter + an Pin 1, COM an Pin 2\nTP1-TP3.....Messpunkte +BATT, +3V3, GND\nJ2, J3.....Stiftleisten 1x04, 12,7 mm Abstand (Breadboard): J2 = +BATT/GND/GND/+3V3, J3 = GND/ADC_BATT/MEAS_EN/+3V3\n"
+	(text "Hinweise\n\nF1.....Schutzschalter gegen Kurzschluss (Polyfuse, 1206)\nR1, R2.....Spannungsteiler 1:2 (100k/100k, 1 %) für ADC Messung der Akku Spannung, C17 150nF Ladungsspeicher für den ADC (AN2834)\nQ1, Q2, R3, R4.....Teiler abschaltbar: MEAS_EN High (3,3 V GPIO) -> Q2 zieht das Gate von Q1 auf GND, Q1 legt +BATT an R1\n                   MEAS_EN offen/Low -> R3/R4 halten Q1/Q2 aus, Teiler stromlos; vor der Messung ca. 60 ms warten, VBAT = 2 x U_ADC\nR7.....52,3 kOhm ±1 %, E96 - stellt 3,3V Ausgang ein\nD1.....Verpolschutz (Schottky SS14)\nSW1.....Ein/Aus über EN von U1 (SPDT): Schieber zu Pin 3 (Silk ON) = EN an +BATT, zu Pin 1 (OFF) = EN an GND; kein Laststrom über SW1\nC2 + C15.....direkt an U1 VIN/GND, C14 22µF 16V X7R Eingangspuffer\nC1 + C16.....Ausgang, Summe aller Kondensatoren an +3V3 max. 40µF (Datenblatt)\nJP1.....Strommessbrücke: Pin 1 (eckig, BUCK) = Wandlerausgang, Pin 2 (3V3) = +3V3-Schiene; Jumper ziehen, Amperemeter + an Pin 1, COM an Pin 2\nTP1-TP3.....Messpunkte +BATT, +3V3, GND\nJ2, J3.....Stiftleisten 1x04, 12,7 mm Abstand (Breadboard): J2 = +BATT/GND/GND/+3V3, J3 = GND/ADC_BATT/MEAS_EN/+3V3\n"
 		(exclude_from_sim no)
 		(at 21.082 128.016 0)
 		(effects
@@ -4290,7 +4290,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "100k"
 			(at 86.36 101.5999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6050,7 +6050,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1M"
+		(property "Value" "100k"
 			(at 86.36 86.3599 0)
 			(show_name no)
 			(do_not_autoplace no)
